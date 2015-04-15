@@ -1,16 +1,13 @@
 org 100h
 section .text
 
-    nop
-    nop
-    nop
-    nop
+jmp loop
     nop
     nop
     nop
     nop
 loop:
-    jmp loop
+    ;jmp loop
 
 mov ah,03Ch        ; the open/create-a-file function
     mov cx,020h        ; file attribute - normal file
@@ -20,7 +17,6 @@ mov ah,03Ch        ; the open/create-a-file function
 jc exit
 
 mov si,ax  ; returns a file handle (probably 5)
-
 
 ; ------ here decrypt file -------
     xor bx, bx
@@ -49,7 +45,7 @@ exit:
 
 ;--------------------------------------------------
 section .data
-    msg db `keygen\x00`
+    msg db `kgn\x00`
     ; let`s fool binwalk users :)
     fool    db `\x1f\x8b\x08\x00\xb5\xcb.U\x00\x03+\xc8,\xa9L\xcb\xcf\xcf\xc9\xcb/IL\xcbIL\xe7\x02\x00~\x80D\xdf\x11\x00\x00\x00`
 ;--------------------------------------------------
