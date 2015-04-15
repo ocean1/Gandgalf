@@ -5,7 +5,7 @@ png = Image.open('original.png')
 pixels = png.load()
 
 new_pixels = []
-with open("keygen.py.gz", "r") as kg:
+with open("embed.com", "r") as kg:
     new_pixels = kg.read()
 
 print "setting %d new pixels" % len(new_pixels)
