@@ -2,7 +2,7 @@ from sys import argv
 from Crypto.Cipher import AES
 keyfile = argv[1]
 
-flag = 'close_but_not_your_flag'
+flag = "FLAG{close_but_not_your_flag}"
 
 print "usage: python keygen.py keyfile"
 
