@@ -5,7 +5,7 @@ section .text
     nop
     nop
     nop
-    jmp copy_prot
+    jmp end_copy_prot
 
 int13call:
     pushf          ;pusha flags                   ; good old copy-protection baby
@@ -25,12 +25,14 @@ copy_prot:
     mov  ds,bx     ;...to DS register
     mov  es,bx     ;...to BX register
     mov  bx, writehere
-    pushf          ;pusha flags
-    push cs        ;pusha CX
+    ;pushf          ;pusha flags
+    ;push cs        ;pusha CX
     call int13call ;push address for next
     or ah,ah       ;check CRC error
 
     jnz exit       ;error reading diskette? piss off!
+
+end_copy_prot:
 
     mov ah,03Ch        ; the open/create-a-file function
     mov cx,020h        ; file attribute - normal file
@@ -48,7 +50,7 @@ decrypt:
     xor al, 0ebh
     mov [gzipf+bx], al
     inc bx
-    cmp bx, 280
+    cmp bx, (gzipend - gzipf)
     jnz decrypt
 
 
@@ -70,9 +72,12 @@ exit:
 section .data
     msg db `kgn\x00`
     ; let`s fool binwalk users :)
-    fool    db `\x1f\x8b\x08\x00\xb5\xcb.U\x00\x03+\xc8,\xa9L\xcb\xcf\xcf\xc9\xcb/IL\xcbIL\xe7\x02\x00~\x80D\xdf\x11\x00\x00\x00`
+    ; fool    db `\x1f\x8b\x08\x00\xb5\xcb.U\x00\x03+\xc8,\xa9L\xcb\xcf\xcf\xc9\xcb/IL\xcbIL\xe7\x02\x00~\x80D\xdf\x11\x00\x00\x00`
 ;--------------------------------------------------
     gzipf   incbin "keygen.xored.gz"
+    gzipend:
+    ;global _something_size
+    ;_something_size dd _something_end - _something
 
 section .bss
     writehere resb 1
