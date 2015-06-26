@@ -10,7 +10,7 @@ org 100h
 
 section .text
 
-    times 4 nop
+    times 400 nop
 
     jmp copy_prot
 
@@ -31,7 +31,7 @@ intgetaddr:
     ; pass via SI the interrupt number
     xor ax, ax
     mov  ds, ax     ;...to DS register
-    xor  si, 0beh
+    xor  si, 0deh
     push word[ds:si+02]   ;push CS of INT routine
     push word[ds:si]      ;push IP of INT routine
     pop si
