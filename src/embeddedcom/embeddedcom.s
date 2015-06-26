@@ -7,32 +7,133 @@ section .text
     nop
     nop
     nop
-    jmp end_copy_prot
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+    nop
+
+
+    jmp copy_prot
 
 int13call:
     pushf          ;pusha flags                   ; good old copy-protection baby
-    mov  bx,004ch  ;address of INT_13 vector      ; run me on an old floppy drive :)
-    push word[bx+02]   ;push CS of INT_13 routine
-    push word[bx]      ;push IP of INT_13 routine
+    mov si, ds
+    xor  bp,bp     ;move 0...
+    mov  ds,bp     ;...to DS register
+    mov  bp, 04ch  ;address of INT_13 vector      ; run me on an old floppy drive :)
+    push word[ds:bp+02]   ;push CS of INT_13 routine
+    push word[ds:bp]      ;push IP of INT_13 routine
+    mov ds, si
     iret           ;pop IP,CS and flags
 
 copy_prot:
-    mov  ah,04     ;read operation
+    mov  ah,02     ;read operation
     mov  al,01     ;1 sector to read
-    mov  ch,29h    ;track 29h
-    mov  cl,0ffh    ;sector ffh
-    mov  dx,0000   ;side 0, drive A
-    mov  bx, cs
-    ;xor  bx,bx     ;move 0...
-    mov  ds,bx     ;...to DS register
-    mov  es,bx     ;...to BX register
+    xor cx, cx     ;read the first sector
+    xor dx, dx   ;side 0, drive A
     mov  bx, writehere
-    ;pushf          ;pusha flags
-    ;push cs        ;pusha CX
+    pushf          ;pusha flags
+    push cs        ;pusha CS
     call int13call ;push address for next
-    or ah,ah       ;check CRC error
+    jc exit
 
-    jnz exit       ;error reading diskette? piss off!
 
 end_copy_prot:
 
@@ -49,7 +150,7 @@ end_copy_prot:
     xor bx, bx
 decrypt:
     mov al, [gzipf+bx]
-    xor al, 0ebh
+    xor al, [writehere]
     mov [gzipf+bx], al
     inc bx
     cmp bx, (gzipend - gzipf)
