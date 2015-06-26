@@ -24,8 +24,8 @@
 lz4_decompress:
         push    di              ;save original starting offset (in case != 0)
         cld                     ;make strings copy forward
-        lodsw
-        lodsw                   ;skip magic number, smaller than "add si,4"
+        ;lodsw
+        ;lodsw                   ;skip magic number, smaller than "add si,4"
         lodsw                   ;load chunk size low 16-bit word
         xchg    bx,ax           ;BX = size of compressed chunk
         add     bx,si           ;BX = threshold to stop decompression
