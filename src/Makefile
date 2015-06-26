@@ -6,15 +6,14 @@ all: build
 
 clean:
 	-$(RM) $(OUTS)
+	-for d in $(DIRS); do (cd $$d; $(MAKE) clean ); done
 
 build:
-	cat keygen.py | gzip -n > keygen.py.gz
-	python create_xored_gz.py
-	cd embeddedcom
-	$(MAKE)
-	cd ../
+
+	cd keygen; $(MAKE)
+	cd embeddedcom; $(MAKE)
 	
 	- python gen_image.py embeddedcom/main.com
 	cp Ub7XL8T.png ../
-	echo "\nDONE!\n"
+	@echo "\nDONE!\n"
 

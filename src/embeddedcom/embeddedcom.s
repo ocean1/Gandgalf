@@ -76,7 +76,7 @@ section .data
     ; let`s fool binwalk users :)
     ; fool    db `\x1f\x8b\x08\x00\xb5\xcb.U\x00\x03+\xc8,\xa9L\xcb\xcf\xcf\xc9\xcb/IL\xcbIL\xe7\x02\x00~\x80D\xdf\x11\x00\x00\x00`
 ;--------------------------------------------------
-    gzipf   incbin "keygen.xored.gz"
+    gzipf   incbin "../keygen/keygen.xored.gz"
     gzipend:
     ;global _something_size
     ;_something_size dd _something_end - _something
