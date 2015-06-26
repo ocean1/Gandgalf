@@ -1,4 +1,6 @@
+cpu   8086
 org 100h
+
 section .text
 
     nop

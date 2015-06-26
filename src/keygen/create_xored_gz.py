@@ -1,5 +1,7 @@
+import sys
+
 out = ""
-with open("keygen.py.gz", 'r') as kg:
+with open(sys.argv[1], 'r') as kg:
 
     key = 0xeb
     keyfile = kg.read()
