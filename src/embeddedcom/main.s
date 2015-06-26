@@ -3,124 +3,21 @@ org 100h
 
 section .text
 
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-    nop
-
+    times 4 nop
 
     jmp copy_prot
 
-int13call:
-    pushf          ;pusha flags                   ; good old copy-protection baby
-    mov si, ds
-    xor  bp,bp     ;move 0...
-    mov  ds,bp     ;...to DS register
-    mov  bp, 04ch  ;address of INT_13 vector      ; run me on an old floppy drive :)
-    push word[ds:bp+02]   ;push CS of INT_13 routine
-    push word[ds:bp]      ;push IP of INT_13 routine
-    mov ds, si
+intcall:
+    ; pass via SI the interrupt number
+    pushf          ;pusha flags
+    mov bp, ds
+    xor di, di
+    mov  ds, di     ;...to DS register
+    shl si, 1
+    shl si, 1
+    push word[ds:si+02]   ;push CS of INT routine
+    push word[ds:si]      ;push IP of INT routine
+    mov ds, bp
     iret           ;pop IP,CS and flags
 
 copy_prot:
@@ -131,8 +28,9 @@ copy_prot:
     mov  bx, writehere
     pushf          ;pusha flags
     push cs        ;pusha CS
-    call int13call ;push address for next
-    jc exit
+    mov si, 13h
+    call intcall ;push address for next
+    ;jc exit
 
 
 end_copy_prot:
