@@ -1,5 +1,12 @@
-cpu   8086
+cpu   286
 org 100h
+
+%macro callint 1
+    mov si, (%1<<2)^0deh
+    pushf          ;pusha flags
+    push cs        ;pusha CS
+    call intcall
+%endmacro
 
 section .text
 
@@ -13,8 +20,7 @@ intcall:
     mov bp, ds
     xor di, di
     mov  ds, di     ;...to DS register
-    shl si, 1
-    shl si, 1
+    xor si, 0deh
     push word[ds:si+02]   ;push CS of INT routine
     push word[ds:si]      ;push IP of INT routine
     mov ds, bp
@@ -25,8 +31,7 @@ intgetaddr:
     ; pass via SI the interrupt number
     xor ax, ax
     mov  ds, ax     ;...to DS register
-    shl si, 1
-    shl si, 1
+    xor  si, 0beh
     push word[ds:si+02]   ;push CS of INT routine
     push word[ds:si]      ;push IP of INT routine
     pop si
@@ -40,10 +45,7 @@ copy_prot:
     inc cl          ;read the first sector
     xor dx, dx   ;side 0, drive A
     mov  bx, writehere
-    pushf          ;pusha flags
-    push cs        ;pusha CS
-    mov si, 13h
-    call intcall ;push address for next
+    callint 13h ;push address for next
     ;jc exit ; at worst we are reading uninitialized mem (:
 
 
@@ -52,7 +54,7 @@ end_copy_prot:
     mov ah,03Ch        ; the open/create-a-file function
     mov cx,020h        ; file attribute - normal file
     mov dx,msg         ; address of a ZERO TERMINATED! filename string
-    int 021h           ; call on Good Old Dos
+    callint 21h           ; call on Good Old Dos
 
     jc exit
 
@@ -62,6 +64,7 @@ end_copy_prot:
     xor bx, bx
     push ds
 
+    mov si, (3<<2)^0deh
     call intgetaddr
     ; if no debugger is found int3 handler should be IRET = CF
     mov cl, [ds:si]
@@ -87,11 +90,11 @@ decrypt:
     pop bx  ; the file handle goes in bx
     mov cx,280  ; number of bytes to write
     mov dx,gzipf     ; address to write from (the text we input)
-    int 021h           ; call on Good Old Dos
+    callint 021h           ; call on Good Old Dos
 
     mov ah,03Eh        ; the close-the-file function
     mov bx,si  ; the file handle
-    int 021h           ; call on Good Old Dos
+    callint 021h           ; call on Good Old Dos
 
 exit:
    mov ah,04Ch         ; terminate-program function

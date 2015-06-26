@@ -1,4 +1,4 @@
-        cpu   8086
+        cpu   286
         org   100h 
 
 ; Compressed loader.
@@ -8,6 +8,10 @@
 ; Jump to home segment 0100h
 
 start: 
+        times 4 nop
+        jmp easy
+        db 0xfe
+easy:
         ;mov   cx,[cdata+4]
         ;add   cx,8+cdata-start
         mov   cx, 0ffffh ;br00dal! copy the whole segment
@@ -62,8 +66,7 @@ lz4_decompress:
         lodsb                   ;grab token to AL
         mov     dx,ax           ;preserve packed token in DX
 @copyliterals:
-        mov     cl,4
-        shr     al,cl           ;unpack upper 4 bits
+        shr     al,4           ;unpack upper 4 bits
         call    @buildfullcount ;build full literal count if necessary
 @doliteralcopy:                 ;src and dst might overlap so do this by bytes
         rep     movsb           ;if cx=0 nothing happens

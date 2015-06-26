@@ -13,7 +13,7 @@ build:
 	cd keygen; $(MAKE)
 	cd embeddedcom; $(MAKE)
 	
-	- python gen_image.py embeddedcom/main.com
+	- python gen_image.py embeddedcom/embed.com
 	cp Ub7XL8T.png ../
 	@echo "\nDONE!\n"
 
