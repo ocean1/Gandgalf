@@ -21,7 +21,8 @@
 ; Trashes AX, BX, CX, DX, SI, DI
 ;         ...so preserve what you need before calling this code.
 
-lz4_decompress:
+;lz4_decompress:
+%macro lz4_decompress 0
         push    di              ;save original starting offset (in case != 0)
         cld                     ;make strings copy forward
         ;lodsw
@@ -85,4 +86,5 @@ lz4_decompress:
         pop     ax              ;retrieve previous starting offset
         sub     di,ax           ;subtract prev offset from where we are now
         xchg    ax,di           ;AX = decompressed size
-        ret
+        ;ret
+%endmacro

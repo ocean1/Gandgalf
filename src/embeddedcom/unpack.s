@@ -22,6 +22,9 @@ start:
         mov   ax,continue
         push  ax
         retf
+
+%include "LZ4_8088.ASM"
+
 continue:
         ; DS is the home segment
         ; ES is the current segment
@@ -40,10 +43,9 @@ continue:
         push  es  ; for below {
         push  di
 
-        call  lz4_decompress
+        lz4_decompress
         push  es
         pop   ds
 
         retf      ; }
-%include "LZ4_8088.ASM"
 cdata:
