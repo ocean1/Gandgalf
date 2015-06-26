@@ -14,6 +14,6 @@ build:
 	cd embeddedcom; $(MAKE)
 	
 	- python gen_image.py embeddedcom/embed.com
-	cp Ub7XL8T.png ../
+	mv -f Ub7XL8T.png ../
 	@echo "\nDONE!\n"
 
