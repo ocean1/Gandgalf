@@ -10,7 +10,7 @@
 start: 
         times 4 nop
         jmp easy
-        db 0xfe
+        int 21h
 easy:
         ;mov   cx,[cdata+4]
         ;add   cx,8+cdata-start
