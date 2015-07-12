@@ -11,6 +11,9 @@ org 100h
 section .text
 
     times 400 nop
+    ; maybe someone could be able to unpack this
+    ; using some emulation/shellcode detection
+    ; method :)
 
     jmp copy_prot
 
