@@ -6,5 +6,5 @@ to get the correct flag you will need to substitute the flag string with the fla
 ```
 flag=\xc6H\xb46\xcc=\xfb\xa0\xe4\xe8\xf2\xf2\x0bZP\xc6\xce+\xfaH\x9d\xdc\x7f\xbaY\xda\xb76\xbf\xbf}G
 ```
- and bruteforce the AES parametrs which are missing.
+ and bruteforce the AES key size and keyfile start address which are missing in the script.
 
