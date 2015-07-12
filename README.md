@@ -1,6 +1,6 @@
-tags: forensics, trivia
+tags: forensics, trivia/riddle, reversing
 
-points: 500 (http://grooveshark.com/playlist/Relax+Sip+Vodka+Zen+Cracking/105238745 in questa playlist (da completare) ci sono delle canzoni tra cui "Am I blue" sono indeciso se inserirla sotto come hint oppure se lo vogliamo dare come hint se nessuno lo sta risolvendo ...ditemi un po')
+points: 500
 
 context: john loves riddles, he wants to challenge you to solve this one, will you be able to solve it?
 
