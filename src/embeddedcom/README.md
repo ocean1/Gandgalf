@@ -8,6 +8,7 @@ and expects an IRET instruction to be in the int 3 interrupt vector entry (will 
 when this conditions are met (silly floppy copy protection and antidebug) it will correctly decrypt the embedded keygen gzip)
 
 searching for useful info?
+- http://www.codejuggle.dj/unpacking-dos-executables-using-dosbox-debugger/
 - http://thestarman.pcministry.com/asm/mbr/DOS50FDB.htm#BPB
 - http://www.dosbox.com/wiki/IMGMOUNT
 - http://www.oldskool.org/pc/lz4_8088
