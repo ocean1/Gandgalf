@@ -28,10 +28,15 @@ hints given:
    - john loves that song: https://www.youtube.com/watch?v=OwDdbZSo4AY (taking back sunday : the blue channel)
    - 90 90 90 90 EB 02 CD 21 -> DOS 16 bit COM
 
+use solution/extract_png.py
+
+
 ## STEP 3
 you got to reverse engineer the embedded COM file and extract the keygen.py correctly
 (you'll need to mount a floppy image in dosbox and patch the int3 since there is a debugger by default in DOSBOX,
-and we check for the debugger presence, expecting an IRET opcode in the int vector for int3, see the README inside src/embeddedcom for more info!)
+and we check for the debugger presence, expecting an IRET opcode in the int vector for int3,
+
+see README.md inside src/embeddedcom for more info!)
 
 no hints
 
@@ -42,4 +47,5 @@ you just need to substitute the flag string that was the parameter of the url yo
 
 if you don't substitute the flag you'll find a fake flag which is not working.
 
+no hints
 
