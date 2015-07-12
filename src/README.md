@@ -22,7 +22,7 @@ the gist contains a keyfile which you'll need to use later to decrypt the flag u
 
 ## STEP 2
 inside the png there is a DOS executable embedded in the blue channel
-(the pixels are embedded in rows no columns as you can just looking closely at the picture and seeing "strange yellow pixels" in the first 2/3 columns)
+(the pixels are embedded in columns -not in rows!- as you can just looking closely at the picture and seeing "strange yellow pixels" in the first 2/3 columns)
 
 hints given:
    - john loves that song: https://www.youtube.com/watch?v=OwDdbZSo4AY (taking back sunday : the blue channel)
