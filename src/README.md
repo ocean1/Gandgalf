@@ -20,6 +20,15 @@ which won't work like that, but if you "host" the ip you'll see it is just a gis
 
 the gist contains a keyfile which you'll need to use later to decrypt the flag using keygen.py
 
+also, the +fravia link was not there by chance, with some searching you could find that +orc proposed the same kind of riddle to +HCU students find his "website":
+
+- http://www.home.aone.net.au/~byzantium/orc1.html
+- http://www.home.aone.net.au/~byzantium/janos.html
+- http://www.home.aone.net.au/~byzantium/targets.html
+
+and the proposed schemes of solution involved XORing parts of the url, though this path is less straightforward than just looking at polictf.it ip and comparing ;)
+
+
 ## STEP 2
 inside the png there is a DOS executable embedded in the blue channel
 (the pixels are embedded in columns -not in rows!- as you can just looking closely at the picture and seeing "strange yellow pixels" in the first 2/3 columns)
